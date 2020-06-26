@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarStore", "CarStore\CarSto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarStore.Test", "CarStore.Test\CarStore.Test.csproj", "{83682729-F068-4B3E-A510-4CB930A15C0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarStore.Library", "CarStore.Library\CarStore.Library.csproj", "{547D6381-5FC7-46B7-9591-1C58AFFAAC76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarStore.DataAccess", "CarStore.DataAccess\CarStore.DataAccess.csproj", "{7624C165-A2BF-4056-938B-8C54C498CE00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +21,9 @@ Global
 		{83682729-F068-4B3E-A510-4CB930A15C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83682729-F068-4B3E-A510-4CB930A15C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83682729-F068-4B3E-A510-4CB930A15C0A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{547D6381-5FC7-46B7-9591-1C58AFFAAC76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{547D6381-5FC7-46B7-9591-1C58AFFAAC76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{547D6381-5FC7-46B7-9591-1C58AFFAAC76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{547D6381-5FC7-46B7-9591-1C58AFFAAC76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7624C165-A2BF-4056-938B-8C54C498CE00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7624C165-A2BF-4056-938B-8C54C498CE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7624C165-A2BF-4056-938B-8C54C498CE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7624C165-A2BF-4056-938B-8C54C498CE00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

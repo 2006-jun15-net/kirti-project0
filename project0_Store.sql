@@ -17,6 +17,7 @@ CREATE TABLE Store.Customer (
             ON DELETE SET NULL
 );
 
+-- DROP TABLE Store.Location
 CREATE TABLE Store.Location (
     LocationId INT IDENTITY(1,1) NOT NULL PRIMARY KEY
 );
@@ -38,7 +39,7 @@ CREATE TABLE Store.Orders (
 CREATE TABLE Store.Product (
     ProductId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     ProductName NVARCHAR(255) NOT NULL,
-    Price DECIMAL (9,2) NOT NULL,
+    Price DECIMAL (9,2) NOT NULL CHECK(Inventory > 0),
 );
 
 CREATE TABLE Store.Stock (
@@ -61,3 +62,19 @@ CREATE TABLE Store.Sold (
         REFERENCES Store.Orders (OrderId)
             ON DELETE CASCADE
 );
+
+ALTER TABLE Store.Location 
+    ADD LocationName NVARCHAR(255) NOT NULL;
+
+INSERT INTO Store.Customer(FirstName, LastName) 
+    VALUES ('Kirti', 'Patel'), ('Yash', 'Patel'), ('Arne', 'Litert'), ('Catherinr', 'McBroom');
+
+DELETE FROM Store.Customer WHERE FirstName = 'Kirti';
+
+INSERT INTO Store.Customer (FirstName, LastName, LocationID) VALUES ('Kirti', 'Patel', 1);
+
+INSERT INTO Store.Location (LocationName) VALUES ('Bothell'), ('Bellevue'), ('Seattle');
+
+INSERT INTO Store.Product (ProductName, Price) 
+    VALUES ('Range Rover', '90000'), ('Tesla', '89480'), ('Audi', '39000'), ('Cadillac', '76195'), ('Acura', '92950'), ('Lexus', '93864');
+
