@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CarStore
 {
@@ -14,31 +15,65 @@ namespace CarStore
 
                 // display options for user to enter
                 Console.WriteLine("\na:\t Place order.");
-                Console.WriteLine("c:\t Search customer\t.");
-                Console.WriteLine("d:\t Display order\t.");
-                Console.WriteLine("e:\t Customer order history\t.");
-                Console.WriteLine("f:\t Location order history\t.");
-                Console.WriteLine("s:\t Save data to disk.");
+
+                //Console.WriteLine("c:\t Search customer\t.");
+                //Console.WriteLine("d:\t Display order\t.");
+                //Console.WriteLine("e:\t Customer order history\t.");
+                //Console.WriteLine("f:\t Location order history\t.");
+                //Console.WriteLine("s:\t Save data to disk.");
+
                 Console.WriteLine("l:\t Load data from disk.");
                 Console.Write("q:\t to exit the store:\n");
 
-                var userInput = Console.ReadLine();
+                var input = Console.ReadLine();
 
                 // if user enterd 'q' then quit the program with exit code 0
-                if (userInput == "q")
+                if (input == "q")
                 {
                     Console.WriteLine("Exiting car delearship store.\nGoodbye, come again!");
                     break;
                 }
-                else if (userInput == "a")
+                else if (input == "a")
                 {
-                    Console.WriteLine("Hello from r");
+                    Console.WriteLine("Hello, you are placing a new order");
+
+                    while (true)
+                    {
+                        Console.WriteLine("\n1:\t Find the car by name.");
+                        Console.WriteLine("\n2:\t Find by brand name.");
+
+                        input = Console.ReadLine();
+                        //parse this string to int
+                        int option = Int32.Parse(input); 
+
+                        if(option == 1)
+                        {
+                            Console.WriteLine("Please enter the car name");
+                            input = Console.ReadLine();
+
+
+                        }
+                        else if (option == 2)
+                        {
+                            Console.WriteLine("Please enter the brand name");
+                            input = Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Invalid input \"{input}\".");
+                        }
+                    }
                 }
                 else
                 {
-                    Console.WriteLine($"Invalid input \"{userInput}\".");
+                    Console.WriteLine($"Invalid input \"{input}\".");
                 }
             }
+        }
+
+        public static void NewOrder()
+        {
+            
         }
     }
 }
