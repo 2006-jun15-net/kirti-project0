@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 namespace CarStore.DataAccess.Model
 {
-    public partial class Sold
+    public partial class OrderLine
     {
-        public int Sold1 { get; set; }
         public int OrderId { get; set; }
+        public int ProductId { get; set; }
 
         public virtual Orders Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

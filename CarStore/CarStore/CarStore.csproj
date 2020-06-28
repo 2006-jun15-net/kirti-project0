@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CarStore.DataAccess\CarStore.DataAccess.csproj" />
+    <ProjectReference Include="..\CarStore.Library\CarStore.Library.csproj" />
   </ItemGroup>
 
   <ItemGroup>

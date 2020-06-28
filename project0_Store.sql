@@ -4,30 +4,30 @@ GO
 CREATE SCHEMA Store
 GO
 
--- DROP TABLE Store.Customer
+-- DROP TABLE Store.Location
+CREATE TABLE Store.Location (
+    LocationId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+    LocationName NVARCHAR(255) NOT NULL
+);
 
+-- DROP TABLE Store.Customer
 CREATE TABLE Store.Customer (
     CustomerId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     FirstName NVARCHAR(26) NOT NULL,
     LastName NVARCHAR(26) NOT NULL,
-    PreviousOrder DATETIME,
+    UserName NVARCHAR(50) NOT NULL,
     LocationId INT
     CONSTRAINT FK_Customer FOREIGN KEY (LocationId) 
         REFERENCES Store.Location (LocationId)
             ON DELETE SET NULL
 );
 
--- DROP TABLE Store.Location
-CREATE TABLE Store.Location (
-    LocationId INT IDENTITY(1,1) NOT NULL PRIMARY KEY
-);
-
 CREATE TABLE Store.Orders (
     OrderId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     LocationId INT NOT NULL,
     CustomerId INT NOT NULL,
-    Price DECIMAL (9,2) NOT NULL,
-    OrderTime DATETIME NOT NULL,
+    Price DECIMAL (9,2) NOT NULL CHECK (Price > 0),
+    OrderDate DATETIME NOT NULL,
     CONSTRAINT FK_LocationId_Location FOREIGN KEY (LocationId) 
         REFERENCES Store.Location (LocationId)
             ON DELETE CASCADE,
@@ -36,10 +36,21 @@ CREATE TABLE Store.Orders (
             ON DELETE CASCADE
 );
 
+CREATE TABLE Store.OrderLine (
+    OrderId INT NOT NULL,
+    ProductId INT NOT NULL,
+    CONSTRAINT FK_OrderId_Orders FOREIGN KEY (OrderId) 
+        REFERENCES Store.Orders (OrderId)
+            ON DELETE CASCADE,
+    CONSTRAINT FK_ProductId_Product FOREIGN KEY (ProductId) 
+        REFERENCES Store.Product (ProductId)
+            ON DELETE CASCADE
+);
+
 CREATE TABLE Store.Product (
     ProductId INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
     ProductName NVARCHAR(255) NOT NULL,
-    Price DECIMAL (9,2) NOT NULL CHECK(Inventory > 0),
+    Price DECIMAL (9,2) NOT NULL CHECK(Price > 0),
 );
 
 CREATE TABLE Store.Stock (
@@ -55,19 +66,8 @@ CREATE TABLE Store.Stock (
             ON DELETE CASCADE
 );
 
-CREATE TABLE Store.Sold (
-    Sold INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-    OrderId INT NOT NULL,
-    CONSTRAINT FK_OrderID_Orders FOREIGN KEY (OrderId) 
-        REFERENCES Store.Orders (OrderId)
-            ON DELETE CASCADE
-);
-
-ALTER TABLE Store.Location 
-    ADD LocationName NVARCHAR(255) NOT NULL;
-
 INSERT INTO Store.Customer(FirstName, LastName) 
-    VALUES ('Kirti', 'Patel'), ('Yash', 'Patel'), ('Arne', 'Litert'), ('Catherinr', 'McBroom');
+    VALUES ('Kirti', 'Patel'), ('Yash', 'Patel'), ('Catherinr', 'McBroom');
 
 DELETE FROM Store.Customer WHERE FirstName = 'Kirti';
 
