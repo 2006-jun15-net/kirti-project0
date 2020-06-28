@@ -12,9 +12,9 @@ namespace CarStore.Library.Repository
         public readonly IRepository<Product> PReposity = new GenericRepo<Product>();
 
         /// <summary>
-        /// print all the orders
+        /// print all the products
         /// </summary>
-        public void DisplayOrders()
+        public void DisplayProducts()
         {
             var products = PReposity.GetAll().ToList();
 
