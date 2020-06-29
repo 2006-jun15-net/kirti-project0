@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Linq;
 using CarStore.DataAccess.Model;
 using CarStore.Library.Repository;
-//using CarStore.Library.Model;
 
 namespace CarStore
 {
     class Program
     {
+        // notes to self:
+            // perfect customer order
+            // finish location orders
+            // fix prices
+            // print products for product details
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -16,7 +21,7 @@ namespace CarStore
 
             while (true)
             {
-                Console.WriteLine("a:\t Placee order."); //incmplete
+                Console.WriteLine("a:\t Place order.");
                 Console.WriteLine("b:\t Add a new customer/search customer.");
                 Console.WriteLine("c:\t Display details of an order."); 
                 Console.WriteLine("d:\t List customer orders."); //incmplete
@@ -31,30 +36,32 @@ namespace CarStore
                 }
                 else if (userInput == "b")
                 {
-                    //customer = helperClass.AddCustomer();
-                    helperClass.AddProducts();
+                    customer = helperClass.AddCustomer();
+                }
+                else if (userInput == "a")
+                {
+                    helperClass.PlaceNewOrder(customer);
                 }
                 else if (userInput == "c")
                 {
-                    Console.Write("Enter ID of the order that you would like to display: ");
-                    string input = Console.ReadLine();
-                    int id = Int32.Parse(input);
-
-                    while (id <= 0)
-                    {
-                        if (id <= 0)
-                            Console.WriteLine($"Invalid input \"{id}\".");
-
-                        Console.Write("Enter ID of the order that you would like to display: ");
-                        input = Console.ReadLine();
-                        id = Int32.Parse(input);
-                    }
-                    OrdersRepo ordersRepo = new OrdersRepo();
-                    ordersRepo.OReposity.GetWithId(id);
+                    helperClass.DisplayOrderDetails();
                 }
                 else if (userInput == "d")
                 {
-                    helperClass.CustomerOrders(); //need to implement
+                    CustomerRepo customerRepo = new CustomerRepo();
+                    customerRepo.DisplayCustomer();
+                    Console.WriteLine("Choose the customer ID to display their order history");
+                    userInput = Console.ReadLine();
+                    int customerId = Int32.Parse(userInput);
+
+                    while (!customerRepo.CReposity.GetAll().Any(s => s.CustomerId == customerId))
+                    {
+                        Console.WriteLine($"Invalid input \"{customerId}\".");
+                        Console.WriteLine("Choose the customer ID to display their order history");
+                        userInput = Console.ReadLine();
+                        customerId = Int32.Parse(userInput);
+                    }
+                    helperClass.CustomerOrders(customerId);
                 }
             }
         }

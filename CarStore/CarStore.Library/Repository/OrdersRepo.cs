@@ -15,14 +15,33 @@ namespace CarStore.Library.Repository
         /// <summary>
         /// print all orders
         /// </summary>
-        public void DisplayOrders()
+        public void DisplayOrders ()
         {
             var orders = OReposity.GetAll().ToList();
 
             foreach (var order in orders)
             {
                 Console.WriteLine($"Order ID [{order.OrderId}], this order was placed by [{order.CustomerId}] customer ID at location ID [{order.LocationId}] on {order.OrderDate}");
+
+
             }
         }
+
+        public void DisplayOrdersAtIndex (int id)
+        {
+            var orders = OReposity.GetAll().ToList();
+
+            if (OReposity.GetAll().Any(o => o.OrderId == id))
+            {
+
+                foreach (var order in orders)
+                {
+                    Console.WriteLine($"Order ID [{order.OrderId}], this order was placed by [{order.CustomerId}] customer ID at location ID [{order.LocationId}] on {order.OrderDate}");
+
+
+                }
+            }
+        }
+
     }
 }

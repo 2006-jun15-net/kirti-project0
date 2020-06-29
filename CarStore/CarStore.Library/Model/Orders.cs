@@ -28,7 +28,7 @@ namespace CarStore.Library.Model
         /// <summary>
         /// cost of the order
         /// </summary>
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
         /// <summary>
         /// date and time it was ordered at
