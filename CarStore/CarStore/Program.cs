@@ -36,7 +36,8 @@ namespace CarStore
                 }
                 else if (userInput == "b")
                 {
-                    customer = helperClass.AddCustomer();
+                    // select the customer or add customer (incomplete)
+                    helperClass.AddCustomer();
                 }
                 else if (userInput == "a")
                 {

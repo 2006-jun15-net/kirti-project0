@@ -9,7 +9,7 @@ namespace CarStore
 {
     public class Helper
     {
-        public Customer AddCustomer ()
+        public void AddCustomer ()
         {
             CustomerRepo customerRepo = new CustomerRepo();
 
@@ -55,8 +55,6 @@ namespace CarStore
                     id = Int32.Parse(input);
                 }
 
-                return customerRepo.CReposity.GetWithId(id);
-
             }
             else if (userInput == "n")
             {
@@ -78,14 +76,12 @@ namespace CarStore
                         id = Int32.Parse(input);
                     }
 
-                    return customerRepo.CReposity.GetWithId(id);
                 }
             }
             else
             {
                 Console.WriteLine($"Invalid input \"{userInput}\".");
             }
-            return null;
         }
 
         public string CheckString (string name, string print, int size)
@@ -112,7 +108,19 @@ namespace CarStore
 
                 foreach (var order in listOrders)
                 {
-                    ordersRepo.DisplayOrdersAtIndex(order.OrderId);
+                    var orders = ordersRepo.OReposity.GetAll().ToList();
+
+                    if (ordersRepo.OReposity.GetAll().Any(o => o.OrderId == id))
+                    {
+
+                        foreach (var item in orders)
+                        {
+                            Console.WriteLine($"Order ID [{item.OrderId}], this order was placed by [{item.CustomerId}] customer ID at location ID [{item.LocationId}] on {item.OrderDate}");
+
+
+                        }
+                    }
+                
                 }
             }
             else

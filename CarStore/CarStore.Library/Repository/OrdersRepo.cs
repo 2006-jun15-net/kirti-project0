@@ -27,21 +27,5 @@ namespace CarStore.Library.Repository
             }
         }
 
-        public void DisplayOrdersAtIndex (int id)
-        {
-            var orders = OReposity.GetAll().ToList();
-
-            if (OReposity.GetAll().Any(o => o.OrderId == id))
-            {
-
-                foreach (var order in orders)
-                {
-                    Console.WriteLine($"Order ID [{order.OrderId}], this order was placed by [{order.CustomerId}] customer ID at location ID [{order.LocationId}] on {order.OrderDate}");
-
-
-                }
-            }
-        }
-
     }
 }
