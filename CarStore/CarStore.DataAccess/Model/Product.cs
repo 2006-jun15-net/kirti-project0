@@ -7,6 +7,7 @@ namespace CarStore.DataAccess.Model
     {
         public Product()
         {
+            OrderLine = new HashSet<OrderLine>();
             Stock = new HashSet<Stock>();
         }
 
@@ -14,6 +15,7 @@ namespace CarStore.DataAccess.Model
         public string ProductName { get; set; }
         public decimal Price { get; set; }
 
+        public virtual ICollection<OrderLine> OrderLine { get; set; }
         public virtual ICollection<Stock> Stock { get; set; }
     }
 }

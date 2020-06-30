@@ -7,6 +7,7 @@ namespace CarStore.DataAccess.Model
     {
         public int OrderId { get; set; }
         public int ProductId { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public virtual Orders Order { get; set; }
         public virtual Product Product { get; set; }

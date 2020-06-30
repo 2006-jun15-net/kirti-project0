@@ -22,7 +22,7 @@ namespace CarStore.Library.Model
         /// <summary>
         /// product name, cannot be empty
         /// </summary>
-        public string Name
+        public string ProductName
         {
             get => _name;
             set

@@ -8,10 +8,8 @@ namespace CarStore
     class Program
     {
         // notes to self:
-            // perfect customer order
-            // finish location orders
-            // fix prices
-            // print products for product details
+            // fix total cost being displayed
+            // search customer by name
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -21,11 +19,13 @@ namespace CarStore
 
             while (true)
             {
-                Console.WriteLine("a:\t Place order.");
-                Console.WriteLine("b:\t Add a new customer/search customer.");
-                Console.WriteLine("c:\t Display details of an order."); 
-                Console.WriteLine("d:\t List customer orders."); //incmplete
-                Console.WriteLine("e:\t List store location orders."); //incmplete
+                Console.WriteLine("a:\t Place order."); // does not calculate price
+                Console.WriteLine("b:\t Add a new customer"); //DONE
+                Console.WriteLine("c:\t Display details of an order."); // DONE
+                Console.WriteLine("d:\t List customer orders."); // DONE
+                Console.WriteLine("e:\t List store location orders."); // DONE
+                Console.WriteLine("f:\t Search customer by name."); //NOT DONE
+                Console.WriteLine("g:\t Add to location, products, and stock.");
                 Console.Write("q:\t To exit the store:\n");
                 var userInput = Console.ReadLine();
 
@@ -34,20 +34,57 @@ namespace CarStore
                     Console.WriteLine("Exiting the store. \nGoodbye, come again!");
                     break;
                 }
+                else if (userInput == "a") // PLACE ORDER
+                {
+                    int id = 0;
+                    CustomerRepo customerRepo = new CustomerRepo();
+
+                    if (customerRepo.CReposity.GetAll().FirstOrDefault() == null)
+                        Console.WriteLine("There are no customers currently.");
+                    else
+                    {
+                        customerRepo.DisplayCustomer();
+
+                        Console.Write("Enter your customer ID: ");
+                        string input = Console.ReadLine();
+                        id = Int32.Parse(input);
+
+                        while (id <= 0)
+                        {
+                            Console.WriteLine($"Invalid input \"{id}\".");
+                            Console.Write("Enter your customer ID: ");
+                            input = Console.ReadLine();
+                            id = Int32.Parse(input);
+                        }
+
+                    }
+
+                    helperClass.PlaceNewOrder(id);
+                }
                 else if (userInput == "b")
                 {
-                    // select the customer or add customer (incomplete)
-                    helperClass.AddCustomer();
+                    helperClass.AddCustomer(); //ADD CUSTOMER
                 }
-                else if (userInput == "a")
+                else if (userInput == "c") //DISPLAY ORDER DETAILS
                 {
-                    helperClass.PlaceNewOrder(customer);
+                    OrdersRepo ordersRepo = new OrdersRepo();
+                    ordersRepo.DisplayOrders();
+
+                    Console.Write("Enter ID of the order that you would like to display: ");
+                    string input = Console.ReadLine();
+                    int orderId = Int32.Parse(input);
+
+                    while (!ordersRepo.OReposity.GetAll().Any(s => s.OrderId == orderId))
+                    {
+                        Console.WriteLine($"Invalid input \"{orderId}\".");
+                        Console.Write("Enter ID of the order that you would like to display: ");
+                        input = Console.ReadLine();
+                        orderId = Int32.Parse(input);
+                    }
+
+                    helperClass.DisplayOrderDetails(orderId);
                 }
-                else if (userInput == "c")
-                {
-                    helperClass.DisplayOrderDetails();
-                }
-                else if (userInput == "d")
+                else if (userInput == "d") //DISPLAY CUSTOMER ORDERS
                 {
                     CustomerRepo customerRepo = new CustomerRepo();
                     customerRepo.DisplayCustomer();
@@ -63,6 +100,29 @@ namespace CarStore
                         customerId = Int32.Parse(userInput);
                     }
                     helperClass.CustomerOrders(customerId);
+                }
+                else if (userInput == "e") //DISPLAY location ORDERS
+                {
+                    LocationRepo locationRepo = new LocationRepo();
+                    locationRepo.DisplayLocation();
+                    Console.WriteLine("Choose the location ID to display their order history");
+                    userInput = Console.ReadLine();
+                    int locationId = Int32.Parse(userInput);
+
+                    while (!locationRepo.LReposity.GetAll().Any(s => s.LocationId == locationId))
+                    {
+                        Console.WriteLine($"Invalid input \"{locationId}\".");
+                        Console.WriteLine("Choose the location ID to display their order history");
+                        userInput = Console.ReadLine();
+                        locationId = Int32.Parse(userInput);
+                    }
+                    helperClass.LocationOrders(locationId);
+                }
+                else if (userInput == "g")
+                {
+                    //helperClass.AddLocation();
+                    //helperClass.AddProducts();
+                    //helperClass.AddStock();
                 }
             }
         }

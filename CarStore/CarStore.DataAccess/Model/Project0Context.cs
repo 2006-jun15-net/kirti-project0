@@ -35,16 +35,6 @@ namespace CarStore.DataAccess.Model
                 entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(26);
-
-                entity.Property(e => e.UserName)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.HasOne(d => d.Location)
-                    .WithMany(p => p.Customer)
-                    .HasForeignKey(d => d.LocationId)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK_Customer");
             });
 
             modelBuilder.Entity<Location>(entity =>
@@ -58,25 +48,28 @@ namespace CarStore.DataAccess.Model
 
             modelBuilder.Entity<OrderLine>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.OrderId, e.ProductId })
+                    .HasName("PK_OrderId_ProductId");
 
                 entity.ToTable("OrderLine", "Store");
 
+                entity.Property(e => e.TotalPrice).HasColumnType("decimal(9, 5)");
+
                 entity.HasOne(d => d.Order)
-                    .WithMany()
+                    .WithMany(p => p.OrderLine)
                     .HasForeignKey(d => d.OrderId)
-                    .HasConstraintName("FK_OrderId_Orders");
+                    .HasConstraintName("FK_OrderLine_OrderId_Orders");
 
                 entity.HasOne(d => d.Product)
-                    .WithMany()
+                    .WithMany(p => p.OrderLine)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK_ProductId_Product");
+                    .HasConstraintName("FK_OrderLine_ProductId_Product");
             });
 
             modelBuilder.Entity<Orders>(entity =>
             {
                 entity.HasKey(e => e.OrderId)
-                    .HasName("PK__Orders__C3905BCF527FC0F0");
+                    .HasName("PK__Orders__C3905BCF9A0E0DAA");
 
                 entity.ToTable("Orders", "Store");
 
@@ -87,17 +80,21 @@ namespace CarStore.DataAccess.Model
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK_CustomerId_Customer");
+                    .HasConstraintName("FK_Orders_CustomerId_Customer");
 
                 entity.HasOne(d => d.Location)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.LocationId)
-                    .HasConstraintName("FK_LocationId_Location");
+                    .HasConstraintName("FK_Orders_LocationId_Location");
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("Product", "Store");
+
+                entity.HasIndex(e => e.ProductName)
+                    .HasName("UQ__Product__DD5A978A5D3EB25F")
+                    .IsUnique();
 
                 entity.Property(e => e.Price).HasColumnType("decimal(9, 2)");
 
@@ -115,12 +112,12 @@ namespace CarStore.DataAccess.Model
                 entity.HasOne(d => d.Location)
                     .WithMany(p => p.Stock)
                     .HasForeignKey(d => d.LocationId)
-                    .HasConstraintName("FK_LocationId2_Location");
+                    .HasConstraintName("FK_LocationId_Location");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Stock)
                     .HasForeignKey(d => d.ProductId)
-                    .HasConstraintName("FK_ProductId2_Product");
+                    .HasConstraintName("FK_ProductId_Product");
             });
 
             OnModelCreatingPartial(modelBuilder);

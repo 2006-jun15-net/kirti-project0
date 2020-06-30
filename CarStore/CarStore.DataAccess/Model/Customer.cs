@@ -13,10 +13,7 @@ namespace CarStore.DataAccess.Model
         public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string UserName { get; set; }
-        public int? LocationId { get; set; }
 
-        public virtual Location Location { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
     }
 }
