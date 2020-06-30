@@ -7,9 +7,6 @@ namespace CarStore
 {
     class Program
     {
-        // notes to self:
-            // fix total cost being displayed
-            // search customer by name
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -24,7 +21,7 @@ namespace CarStore
                 Console.WriteLine("c:\t Display details of an order."); // DONE
                 Console.WriteLine("d:\t List customer orders."); // DONE
                 Console.WriteLine("e:\t List store location orders."); // DONE
-                Console.WriteLine("f:\t Search customer by name."); //NOT DONE
+                Console.WriteLine("f:\t Search customer by name."); //DONE
                 Console.WriteLine("g:\t Add to location, products, and stock.");
                 Console.Write("q:\t To exit the store:\n");
                 var userInput = Console.ReadLine();
@@ -117,6 +114,12 @@ namespace CarStore
                         locationId = Int32.Parse(userInput);
                     }
                     helperClass.LocationOrders(locationId);
+                }
+                else if (userInput == "f")
+                {
+                    Console.WriteLine("Enter the first name of the customer you would like to search");
+                    string name = Console.ReadLine();
+                    helperClass.SearCustomerByName(name);
                 }
                 else if (userInput == "g")
                 {

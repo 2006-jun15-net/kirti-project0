@@ -50,7 +50,9 @@ namespace CarStore
             if (ordersRepo.OReposity.GetAll().Any(s => s.CustomerId == id))
             {
                 List<Orders> listOrders = ordersRepo.OReposity
-                    .GetAll().Where(e => e.CustomerId == id).ToList();
+                    .GetAll()
+                    .Where(e => e.CustomerId == id)
+                    .ToList();
 
                 foreach (var order in listOrders)
                 {
@@ -63,21 +65,21 @@ namespace CarStore
 
         public void LocationOrders (int id)
         {
-            LocationRepo locationRepo = new LocationRepo();
-            if (locationRepo.LReposity.GetAll().Any(s => s.LocationId == id))
+            OrdersRepo ordersRepo = new OrdersRepo();
+            if (ordersRepo.OReposity.GetAll().Any(s => s.LocationId == id))
             {
-                List<Location> listOrders = locationRepo.LReposity
+                List<Orders> listOrders = ordersRepo.OReposity
                     .GetAll()
                     .Where(e => e.LocationId == id)
                     .ToList();
 
                 foreach (var order in listOrders)
                 {
-                    DisplayOrderDetails(order.LocationId);
+                    DisplayOrderDetails(order.OrderId);
                 }
             }
             else
-                Console.WriteLine($"There are no orders for customer ID [{id}]");
+                Console.WriteLine($"There are no orders associated with location ID [{id}]");
         }
 
         public void PlaceNewOrder (int id)
@@ -243,6 +245,7 @@ namespace CarStore
                 {
                     Console.WriteLine($"For {item.Product.ProductName} the price is {item.Product.Price}");
                 }
+                context.Dispose();
             }
             else
                 Console.WriteLine($"There are no orders associated with ID: {orderId}");
@@ -364,6 +367,20 @@ namespace CarStore
             Console.WriteLine("Product was successfully added!");
             productRepo.DisplayProducts();
 
+        }
+
+        public void SearCustomerByName(string name)
+        {
+            CustomerRepo customerRepo = new CustomerRepo();
+            if (customerRepo.CReposity.GetAll().Any(c => c.FirstName.Equals(name)))
+            {
+                Customer customer = customerRepo.CReposity.GetAll().First(c => c.FirstName.Equals(name));
+                Console.WriteLine($"The customer that you are looking for, their ID is [{customer.CustomerId}] and their full name is {customer.FirstName} {customer.LastName}");
+            }
+            else
+            {
+                Console.WriteLine($"No customers exist by that name: {name}");
+            }
         }
     }
 }
