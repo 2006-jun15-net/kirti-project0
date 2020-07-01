@@ -33,6 +33,8 @@ namespace CarStore.Library.Model
             {
                 if (value.Length == 0)
                     throw new ArgumentException("First-name cannot be empty", nameof(value));
+                if (value.Length > 26)
+                    throw new ArgumentException("First-name is too long", nameof(value));
 
                 _fName = value;
             }
@@ -48,6 +50,8 @@ namespace CarStore.Library.Model
             {
                 if (value.Length == 0)
                     throw new ArgumentException("Last-name cannot be empty", nameof(value));
+                if (value.Length > 26)
+                    throw new ArgumentException("Last-name is too long", nameof(value));
 
                 _lName = value;
             }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CarStore.Library.Model;
 
 namespace CarStore.Library
 {
@@ -16,7 +15,7 @@ namespace CarStore.Library
         /// </summary>
         /// <param name="id">(table)Id</param>
         /// <returns>the object at that specified id</returns>
-        T GetWithId(object id);
+        T GetById(object id);
 
         /// <summary>
         /// get everything from the table

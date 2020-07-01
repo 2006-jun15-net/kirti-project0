@@ -4,12 +4,12 @@ GO
 CREATE SCHEMA Store
 GO
 
-DROP TABLE Store.Location;
-DROP TABLE Store.Customer;
-DROP TABLE Store.Orders;
-DROP TABLE Store.OrderLine;
-DROP TABLE Store.Product;
-DROP TABLE Store.Stock;
+-- DROP TABLE Store.Location;
+-- DROP TABLE Store.Customer;
+-- DROP TABLE Store.Orders;
+-- DROP TABLE Store.OrderLine;
+-- DROP TABLE Store.Product;
+-- DROP TABLE Store.Stock;
 
 
 CREATE TABLE Store.Location (
@@ -68,3 +68,5 @@ CREATE TABLE Store.Stock (
         REFERENCES Store.Location (LocationID)
             ON DELETE CASCADE
 );
+
+SELECT * FROM Store.Orders;

@@ -69,7 +69,7 @@ namespace CarStore.DataAccess.Model
             modelBuilder.Entity<Orders>(entity =>
             {
                 entity.HasKey(e => e.OrderId)
-                    .HasName("PK__Orders__C3905BCF9A0E0DAA");
+                    .HasName("PK__Orders__C3905BCFBE405843");
 
                 entity.ToTable("Orders", "Store");
 
@@ -93,10 +93,10 @@ namespace CarStore.DataAccess.Model
                 entity.ToTable("Product", "Store");
 
                 entity.HasIndex(e => e.ProductName)
-                    .HasName("UQ__Product__DD5A978A5D3EB25F")
+                    .HasName("UQ__Product__DD5A978A1C7A7EF4")
                     .IsUnique();
 
-                entity.Property(e => e.Price).HasColumnType("decimal(9, 2)");
+                entity.Property(e => e.Price).HasColumnType("decimal(11, 5)");
 
                 entity.Property(e => e.ProductName)
                     .IsRequired()

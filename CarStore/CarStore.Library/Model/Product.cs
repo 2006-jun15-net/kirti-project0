@@ -2,7 +2,7 @@
 namespace CarStore.Library.Model
 {
     /// <summary>
-    /// 
+    /// product object
     /// </summary>
     public class Product
     {

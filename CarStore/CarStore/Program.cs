@@ -7,26 +7,34 @@ namespace CarStore
 {
     class Program
     {
+        /// <summary>
+        /// main method
+        /// calls methods for each of the functionality
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             var helperClass = new Helper();
             Customer customer = new Customer();
 
             while (true)
             {
-                Console.WriteLine("a:\t Place order."); // does not calculate price
+                Console.WriteLine("a:\t Place order."); // DONE
                 Console.WriteLine("b:\t Add a new customer"); //DONE
                 Console.WriteLine("c:\t Display details of an order."); // DONE
                 Console.WriteLine("d:\t List customer orders."); // DONE
                 Console.WriteLine("e:\t List store location orders."); // DONE
                 Console.WriteLine("f:\t Search customer by name."); //DONE
-                Console.WriteLine("g:\t Add to location, products, and stock.");
-                Console.Write("q:\t To exit the store:\n");
-                var userInput = Console.ReadLine();
+                Console.WriteLine("g:\t Add to location.");
+                Console.WriteLine("h:\t Add products.");
+                Console.WriteLine("i:\t Add stock.");
+                Console.WriteLine("q:\t To exit the store:\n");
 
-                if (userInput == "q")
+                Console.WriteLine("Select an option from above: ");
+                var userInput = Console.ReadLine();
+                Console.WriteLine();
+
+                if (userInput == "q") //QUIT
                 {
                     Console.WriteLine("Exiting the store. \nGoodbye, come again!");
                     break;
@@ -56,18 +64,22 @@ namespace CarStore
 
                     }
 
-                    helperClass.PlaceNewOrder(id);
+                    if (id > 0)
+                    {
+                        helperClass.PlaceNewOrder(id);
+                    }
+
                 }
-                else if (userInput == "b")
+                else if (userInput == "b") //ADD CUSTOMER
                 {
-                    helperClass.AddCustomer(); //ADD CUSTOMER
+                    helperClass.AddCustomer(); 
                 }
                 else if (userInput == "c") //DISPLAY ORDER DETAILS
                 {
                     OrdersRepo ordersRepo = new OrdersRepo();
                     ordersRepo.DisplayOrders();
 
-                    Console.Write("Enter ID of the order that you would like to display: ");
+                    Console.Write("\nEnter ID of the order that you would like to display: ");
                     string input = Console.ReadLine();
                     int orderId = Int32.Parse(input);
 
@@ -85,7 +97,7 @@ namespace CarStore
                 {
                     CustomerRepo customerRepo = new CustomerRepo();
                     customerRepo.DisplayCustomer();
-                    Console.WriteLine("Choose the customer ID to display their order history");
+                    Console.WriteLine("\nChoose the customer ID to display their order history");
                     userInput = Console.ReadLine();
                     int customerId = Int32.Parse(userInput);
 
@@ -102,7 +114,7 @@ namespace CarStore
                 {
                     LocationRepo locationRepo = new LocationRepo();
                     locationRepo.DisplayLocation();
-                    Console.WriteLine("Choose the location ID to display their order history");
+                    Console.WriteLine("\nChoose the location ID to display their order history");
                     userInput = Console.ReadLine();
                     int locationId = Int32.Parse(userInput);
 
@@ -115,17 +127,24 @@ namespace CarStore
                     }
                     helperClass.LocationOrders(locationId);
                 }
-                else if (userInput == "f")
+                else if (userInput == "f") //SEARCH CUSTOMER BY NAME
                 {
                     Console.WriteLine("Enter the first name of the customer you would like to search");
                     string name = Console.ReadLine();
                     helperClass.SearCustomerByName(name);
-                }
-                else if (userInput == "g")
+                } 
+                else if (userInput == "g") // ADD LOCATION
                 {
-                    //helperClass.AddLocation();
-                    //helperClass.AddProducts();
-                    //helperClass.AddStock();
+                    helperClass.AddLocation();
+                }
+                else if (userInput == "h") //ADD PRODUCTS
+                {
+                    helperClass.AddProducts();
+                }
+                else if (userInput == "i") //ADD STOCK OF THE PRODUCTS
+                {
+
+                    helperClass.AddStock();
                 }
             }
         }

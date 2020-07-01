@@ -20,7 +20,7 @@ namespace CarStore.Library.Repository
 
         // establish connection
         public static readonly DbContextOptions<Project0Context> Options = new DbContextOptionsBuilder<Project0Context>()
-            .UseLoggerFactory(MyLoggerFactory)
+            //.UseLoggerFactory(MyLoggerFactory)
             .UseSqlServer(SecretConfiguration.ConnectionString)
             .Options;
 
@@ -47,7 +47,7 @@ namespace CarStore.Library.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns>returns information from the given id</returns>
-        public T GetWithId(object id)
+        public T GetById(object id)
         {
             return _tableLst.Find(id);
         }
@@ -85,7 +85,7 @@ namespace CarStore.Library.Repository
         /// </summary>
         public void Save()
         {
-            context.SaveChanges();
+            _ = context.SaveChanges();
         }
     }
 }
