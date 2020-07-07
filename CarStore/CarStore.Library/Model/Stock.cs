@@ -29,7 +29,7 @@ namespace CarStore.Library.Model
         }
 
         /// <summary>
-        /// Location ID
+        /// Location ID, run on change to check commit
         /// </summary>
         public int LocationId
         {
