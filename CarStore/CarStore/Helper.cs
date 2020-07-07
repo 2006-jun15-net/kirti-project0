@@ -20,7 +20,7 @@ namespace CarStore
             string fName = Console.ReadLine();
             fName = CheckString(fName, "first", 26);
 
-            Console.Write("\n Enter last-name of the customer: ");
+            Console.Write("Enter last-name of the customer: ");
             string lName = Console.ReadLine();
             lName = CheckString(lName, "last", 26);
 
@@ -31,7 +31,7 @@ namespace CarStore
             };
             customerRepo.CReposity.Add(newCustomer);
             customerRepo.CReposity.Save();
-            Console.WriteLine("\n You have been added to the database successfully! \n ");
+            Console.WriteLine("You have been added to the database successfully! \n ");
 
         }
 
@@ -205,7 +205,8 @@ namespace CarStore
 
                 foreach (var item in order.OrderLine)
                 {
-                    Console.WriteLine($"\n{item.Product.ProductName} with the price of {item.Product.Price}");
+                    //change the TotalPrice to quantity and make it type int
+                    Console.WriteLine($"\n{item.Quantity} {item.Product.ProductName} for the price of {item.Product.Price}");
                 }
                 Console.WriteLine();
                 context.Dispose();
@@ -240,7 +241,7 @@ namespace CarStore
             }
 
             Location locationName = locationRepo.LReposity.GetById(locationID);
-            Console.WriteLine($"\nYou have selected {locationName} location");
+            Console.WriteLine($"\nYou have selected {locationName.LocationName} location");
 
             Console.WriteLine("\nBelow is the list of all the products you can add: \n");
             productRepo.DisplayProducts();
@@ -402,7 +403,7 @@ namespace CarStore
                     saveProduct.OrderLine.Add(new OrderLine
                     {
                         Order = saveOrder,
-                        TotalPrice = productDictionary[item],
+                        Quantity = productDictionary[item],
                     });
                 }
 
