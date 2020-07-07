@@ -14,7 +14,7 @@ namespace CarStore.Library.Model
         public int StockId { get; set; }
 
         /// <summary>
-        /// Product ID
+        /// property for productId
         /// </summary>
         public int ProductId
         {
@@ -29,7 +29,7 @@ namespace CarStore.Library.Model
         }
 
         /// <summary>
-        /// Location ID, run on change to check commit
+        /// property for locationId
         /// </summary>
         public int LocationId
         {
@@ -44,7 +44,7 @@ namespace CarStore.Library.Model
         }
 
         /// <summary>
-        /// Amount in Inventory
+        /// property for Inventory count
         /// </summary>
         public int Inventory
         {

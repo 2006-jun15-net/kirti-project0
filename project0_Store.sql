@@ -4,12 +4,12 @@ GO
 CREATE SCHEMA Store
 GO
 
--- DROP TABLE Store.Location;
--- DROP TABLE Store.Customer;
--- DROP TABLE Store.Orders;
--- DROP TABLE Store.OrderLine;
--- DROP TABLE Store.Product;
--- DROP TABLE Store.Stock;
+DROP TABLE Store.Location;
+DROP TABLE Store.Customer;
+DROP TABLE Store.Orders;
+DROP TABLE Store.OrderLine;
+DROP TABLE Store.Product;
+DROP TABLE Store.Stock;
 
 
 CREATE TABLE Store.Location (
@@ -46,7 +46,7 @@ CREATE TABLE Store.Orders (
 CREATE TABLE Store.OrderLine (
     OrderId INT NOT NULL,
     ProductId INT NOT NULL,
-    TotalPrice DECIMAL(9,5) NOT NULL CHECK(TotalPrice > 0),
+    Quantity INT NOT NULL CHECK(Quantity > 0),
     CONSTRAINT PK_OrderId_ProductId PRIMARY KEY(OrderId, ProductId),
     CONSTRAINT FK_OrderLine_OrderId_Orders FOREIGN KEY (OrderId) 
         REFERENCES Store.Orders (OrderId)

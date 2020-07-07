@@ -53,8 +53,6 @@ namespace CarStore.DataAccess.Model
 
                 entity.ToTable("OrderLine", "Store");
 
-                entity.Property(e => e.TotalPrice).HasColumnType("decimal(9, 5)");
-
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderLine)
                     .HasForeignKey(d => d.OrderId)
@@ -69,7 +67,7 @@ namespace CarStore.DataAccess.Model
             modelBuilder.Entity<Orders>(entity =>
             {
                 entity.HasKey(e => e.OrderId)
-                    .HasName("PK__Orders__C3905BCFBE405843");
+                    .HasName("PK__Orders__C3905BCF7898E3E1");
 
                 entity.ToTable("Orders", "Store");
 
@@ -93,10 +91,10 @@ namespace CarStore.DataAccess.Model
                 entity.ToTable("Product", "Store");
 
                 entity.HasIndex(e => e.ProductName)
-                    .HasName("UQ__Product__DD5A978A1C7A7EF4")
+                    .HasName("UQ__Product__DD5A978AC2B0EB9A")
                     .IsUnique();
 
-                entity.Property(e => e.Price).HasColumnType("decimal(11, 5)");
+                entity.Property(e => e.Price).HasColumnType("decimal(9, 2)");
 
                 entity.Property(e => e.ProductName)
                     .IsRequired()

@@ -19,12 +19,12 @@ namespace CarStore
 
             while (true)
             {
-                Console.WriteLine("a:\t Place order."); // DONE
-                Console.WriteLine("b:\t Add a new customer"); //DONE
-                Console.WriteLine("c:\t Display details of an order."); // DONE
-                Console.WriteLine("d:\t List customer orders."); // DONE
-                Console.WriteLine("e:\t List store location orders."); // DONE
-                Console.WriteLine("f:\t Search customer by name."); //DONE
+                Console.WriteLine("a:\t Place order."); 
+                Console.WriteLine("b:\t Add a new customer"); 
+                Console.WriteLine("c:\t Display details of an order."); 
+                Console.WriteLine("d:\t List customer orders."); 
+                Console.WriteLine("e:\t List store location orders."); 
+                Console.WriteLine("f:\t Search customer by name."); 
                 Console.WriteLine("g:\t Add to location.");
                 Console.WriteLine("h:\t Add products.");
                 Console.WriteLine("i:\t Add stock.");
