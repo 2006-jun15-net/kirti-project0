@@ -13,6 +13,9 @@ namespace CarStore.Library.Model
 
         public int StockId { get; set; }
 
+        /// <summary>
+        /// Product ID
+        /// </summary>
         public int ProductId
         {
             get => _productId;
@@ -25,6 +28,9 @@ namespace CarStore.Library.Model
             }
         }
 
+        /// <summary>
+        /// Location ID
+        /// </summary>
         public int LocationId
         {
             get => _locationId;
@@ -37,6 +43,9 @@ namespace CarStore.Library.Model
             }
         }
 
+        /// <summary>
+        /// Amount in Inventory
+        /// </summary>
         public int Inventory
         {
             get => _inventory;
